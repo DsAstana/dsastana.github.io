@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votum Separatum dr. Eggermana - Raport Stockton</title>
+    <style>
+        /* Styl dla strony votum separatum */
+        body {
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)),
+                url('images/inspektor.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 1001;
+            background-color: rgba(80, 0, 0, 0.95);
+            color: #ff6b6b;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 107, 107, 0.5);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-size: 1.1em;
+        }
+        
+        .back-button:hover {
+            background-color: rgba(255, 107, 107, 0.3);
+            transform: translateX(-5px);
+            border-color: rgba(255, 107, 107, 0.8);
+            color: #fff;
+        }
+        
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+        
+        .document-header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            background-color: rgba(40, 0, 0, 0.8);
+            border-radius: 10px;
+            border: 3px solid rgba(255, 107, 107, 0.5);
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.2);
+        }
+        
+        .document-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            font-family: 'Times New Roman', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .document-header .subtitle {
+            font-size: 1.3em;
+            color: #ff9999;
+            opacity: 0.9;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .document-header .author {
+            font-size: 1.1em;
+            color: #ff9999;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 107, 107, 0.3);
+            padding-top: 15px;
+            display: inline-block;
+        }
+        
+        .document-content {
+            background-color: rgba(30, 0, 0, 0.85);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .document-section {
+            margin-bottom: 40px;
+        }
+        
+        .document-section h2 {
+            color: #ff6b6b;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .document-text {
+            color: #ffcccc;
+            font-size: 1.1em;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        
+        .document-text blockquote {
+            border-left: 4px solid rgba(255, 107, 107, 0.5);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #ff9999;
+            background-color: rgba(255, 107, 107, 0.1);
+            padding: 15px 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .document-text ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .document-text li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .document-text li:before {
+            content: "";
+            color: #ff6b6b;
+            position: absolute;
+            left: -20px;
+        }
+        
+        .document-text strong {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .document-text em {
+            color: #ff9999;
+            font-style: italic;
+        }
+        
+        .recommendations {
+            background-color: rgba(50, 0, 0, 0.9);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid rgba(255, 107, 107, 0.4);
+        }
+        
+        .recommendations h3 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+        
+        .signature-section {
+            text-align: right;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .signature {
+            color: #ff9999;
+            font-size: 1.2em;
+            font-family: 'Brush Script MT', cursive;
+            margin-top: 40px;
+        }
+        
+        .signature-name {
+            font-size: 1.3em;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .signature-title {
+            font-size: 1em;
+            color: #ff9999;
+            font-style: italic;
+        }
+        
+        .confidential-stamp {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            transform: rotate(-15deg);
+            color: rgba(255, 107, 107, 0.7);
+            font-size: 1.5em;
+            font-weight: bold;
+            border: 3px solid rgba(255, 107, 107, 0.7);
+            padding: 15px 25px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+        
+        footer {
+            background-color: rgba(20, 0, 0, 0.95);
+            backdrop-filter: blur(8px);
+            border-top: 2px solid rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            padding: 20px;
+            text-align: center;
+            margin-top: 60px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        /* Animacje */
+        @keyframes redPulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 107, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+        
+        .document-header {
+            animation: redPulse 3s infinite;
+        }
+        
+        /* Responsywność */
+        @media (max-width: 768px) {
+            main {
+                padding: 80px 15px 30px;
+            }
+            
+            .document-header h1 {
+                font-size: 2em;
+            }
+            
+            .document-content {
+                padding: 25px;
+            }
+            
+            .document-section h2 {
+                font-size: 1.6em;
+            }
+            
+            .back-button {
+                position: absolute;
+                top: 70px;
+                left: 10px;
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            
+            .confidential-stamp {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                transform: rotate(0);
+                margin: 30px auto;
+                display: table;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .document-header h1 {
+                font-size: 1.7em;
+            }
+            
+            .document-header .subtitle {
+                font-size: 1em;
+            }
+            
+            .document-content {
+                padding: 20px;
+            }
+            
+            .document-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Przycisk powrotu -->
+    <a href="stockston.html" class="back-button">← Powrót do raportu</a>
+    
+    <main>
+        <div class="document-header">
+            <h1>Votum Separatum</h1>
+            <div class="subtitle">Odrębne stanowisko w sprawie raportu KC/INS/2023/31-10/STOCKTON</div>
+            <div class="author">Dr Eggerman | Wydział Kryminologii</div>
+        </div>
+        
+        <div class="document-content">
+            <div class="document-section">
+                <div class="document-text">
+                    <p>Jako długoletniego pracownika wydziału studiów kryminologii oraz departamentu na rzecz zwalczania wiedzy o metodach astańskiej policji i służb wywiadowczych „Raport dla KC w sprawie inspekcji z dnia 31 października 2023" wprawił mnie w osłupienie. Moim zdaniem raport nie ma właściwego oparcia należytego przy tego typu operacji tj. inspekcji.</p>
+                    
+                    <p>Podstawowym problemem jest brak wystarczającego materiału dowodowego tj. nie przedstawiono rzeczy które jakoby znaleziono, nie ma załączonych wystarczającej ilości dowodów fotograficznych lub wideo. Dziwnym ale i klasycznym dla inspektora Kairskiego jest brak informacji o istnieniu decyzji czy skierowania na podstawie którego do samej inspekcji w ogóle doszło, można zatem zakładać że było to działanie bezprawne tj. samowola urzędnicza. Powyższe problemy oznaczają iż mogło dojść do manipulacji i fałszerstwa.</p>
+                    
+                    <blockquote>
+                        W związku z tym chciałbym zaprezentować KC krytyczne uwagi ws. przedstawionego w raporcie streszczenia zdarzeń. Każdy punkt koresponduje ze swoim odpowiednikiem w raporcie.
+                    </blockquote>
+                    
+                    <ol>
+                        <li>Brakuje tutaj informacji w jaki właściwie sposób obaj funkcjonariusze znaleźli się w tym miejscu, oczywiście nie ma również odnośnika do nakazu przeszukania.</li>
+                        
+                        <li>Konsumpcja śniadania z produktów znalezionych na miejscu bez zabezpieczenia ich jako potencjalnych dowodów narusza procedury i stanowi dowód nieprofesjonalizmu.</li>
+                        
+                        <li>Oględziny ulicy zostały opisane ogólnikowo, bez dokumentacji fotograficznej ani szczegółowej lokalizacji obiektów, co utrudnia weryfikację.</li>
+                        
+                        <li>Rozmowa z sąsiadem została odnotowana jedynie w formie streszczenia, brak zapisu audio/wideo, co uniemożliwia ocenę wiarygodności zeznań obu funkcjonariuszy.</li>
+                        
+                        <li>Opis „śladów przecieru pomidorowego" jest nieprecyzyjny i niepoparty materiałem dowodowym; nie wyjaśniono, dlaczego ślady te uznano za istotne.</li>
+                        
+                        <li><strong>"Zdarzenia paranormalne prawdopodobnie wywołane babilońskim dopalaczem".</strong> Jest to kluczowy, a zarazem najbardziej kompromitujący fragment całego raportu. Nie tylko przyznają się panowie do kontaktu z nieznaną substancją psychoaktywną, ale jeszcze czynią z niej główną przyczynę wydarzeń. "Prawdopodobnie" to za mało. Gdzie protokół pobrania próbek? Gdzie opis objawów? Gdzie choćby wiarygodne źródło tej fantazyjnej nazwy? Czy "babiloński dopalacz" to żargonowe określenie na mieszankę alkoholu i jeszcze gorszego rozeznania w terenie? Używając takiego języka, autorzy sami podważają swoją wiarygodność i stawiają się w pozycji osób, których percepcja w dniu zdarzeń była co najmniej zaburzona. <strong>To nie jest punkt w śledztwie — to jest przyznanie się do popełnienia poważnego uchybienia służbowego.</strong></li>
+                        
+                        <li>Całe "znalezienie" zabytkowej kamery odbywa się w cieniu tego domniemanego zatrucia. Jak możemy ufać identyfikacji przedmiotu, jeśli dokonywała ją osoba pod wpływem nieznanej substancji? Może to była zwykła skrzynka na narzędzia? A może nic tam nie było? Relacja staje się całkowicie nieweryfikowalna i niewarta papieru, na której ją spisano.</li>
+                        
+                        <li>Kolejne wzmianki o "zdarzeniach paranormalnych". Po ujawnieniu informacji o domniemanym dopalaczu, każde takie stwierdzenie przestaje być niesamowitym faktem, a staje się <strong>przewidywalnym symptomem zatrucia lub halucynozy</strong>. Zamiast opisu duchów, raport powinien zawierać opis własnych stanów przedmiotowych: rozszerzenie źrenic, zaburzenia równowagi, omamy. To, co przedstawiają jako fakty śledcze, jest z najwyższym prawdopodobieństwem kroniką ich własnego, chemicznie indukowanego odlotu.</li>
+                        
+                        <li>Oglądanie "propagandowego filmu" w takich okolicznościach. Czy Stockton rzeczywiście coś wyświetlił, czy też nasi funkcjonariusze doświadczyli zbiorowej projekcji psychodelicznej? Bez zabezpieczenia nośnika i przy takim obciążeniu kontekstu, twierdzenie o treści filmu jest bezwartościowe.</li>
+                        
+                        <li><strong>Kulminacja: "uwięzienie w kamerze".</strong> To nie jest wniosek śledczy. To jest klasyczny opis bad tripu, koszmaru lub psychozy. Osoba w takim stanie nie jest w stanie wiarygodnie relacjonować zdarzeń, a co dopiero formułować zarzuty karne.</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="document-section">
+                <h2>Podsumowanie wąskie (dot. punktu 6. i pochodnych)</h2>
+                <div class="document-text">
+                    <p>Raport jawnie przyznaje, że jego autorzy działali w warunkach, w których ich percepcja mogła być głęboko zniekształcona przez nieznaną substancję chemiczną. Użycie sformułowań typu "babiloński dopalacz" i przypisanie mu zjawisk paranormalnych przekreśla naukową i proceduralną wartość każdego kolejnego ustalenia. Wszystkie "nadprzyrodzone" elementy raportu należy automatycznie zakwalifikować jako potencjalne objawy zatrucia lub jego następstwa, a nie jako fakty śledcze.</p>
+                </div>
+            </div>
+            
+            <div class="recommendations">
+                <h3>Zalecenia bezwzględne:</h3>
+                <div class="document-text">
+                    <ol>
+                        <li>Natychmiastowe odsunięcie inspektora Kairskiego i detektywa Valentino od czynności służbowych do czasu wyjaśnienia sprawy.</li>
+                        
+                        <li>Nakazanie im poddania się szczegółowym badaniom toksykologicznym oraz psychiatrycznym, mającym na celu ustalenie, czy i jakimi substancjami byli pod wpływem w dniu 31.10.2023, a także czy nie występują u nich trwałe zaburzenia postrzegania.</li>
+                        
+                        <li>Wszczęcie postępowania dyscyplinarnego za niestosowny, nienaukowy i autokompromitujący język raportu, który świadczy o skrajnym braku profesjonalizmu.</li>
+                        
+                        <li>Całkowite oddalenie części raportu dotyczącej "zdarzeń paranormalnych" i "dopalacza" jako bezwartościowej i szkodliwej dla śledztwa.</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="signature-section">
+                <div class="signature">
+                    <div>Z poważaniem,</div>
+                    <div class="signature-name">Dr Eggerman</div>
+                    <div class="signature-title">Wydział Kryminologii</div>
+                    <div class="signature-title">Departament Zwalczania Wiedzy o Metodach Astańskiej Policji</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pieczęć poufności -->
+        <div class="confidential-stamp">
+            POUFNE<br>VOTUM SEPARATUM
+        </div>
+		        <div style="text-align: center; margin-top: 40px; padding: 15px; background-color: rgba(0, 0, 0, 0.5); border-radius: 5px; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: #ff6b6b; font-weight: bold; font-size: 0.9em;">
+                DOKUMENT POUFNY - VOTUM SEPARATUM<br>
+                KLASYFIKACJA: STRZEŻONY<br>
+                DOSTĘP: TYLKO DLA UPOWAŻNIONYCH PRACOWNIKÓW KC
+            </p>
+        </div>
+    </main>
+    
+
+</body>
+</html>

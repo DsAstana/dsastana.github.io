@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)),
+                url('images/inspektor.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .top-bar {
+            background-color: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        main {
+            padding-top: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 1001;
+            background-color: rgba(44, 62, 80, 0.95);
+            color: #4fc3f7;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 1.1em;
+        }
+        
+        .back-button:hover {
+            background-color: rgba(79, 195, 247, 0.2);
+            transform: translateX(-5px);
+            border-color: rgba(79, 195, 247, 0.6);
+            color: #fff;
+        }
+        
+        .attachment-header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        .attachment-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #4fc3f7;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+        
+        .attachment-header .subtitle {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            opacity: 0.9;
+        }
+        
+        .attachment-header .ref {
+            font-size: 1em;
+            color: #ccc;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .attachment-content {
+            background-color: rgba(20, 30, 40, 0.9);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .attachment-section {
+            margin-bottom: 40px;
+        }
+        
+        .attachment-section h2 {
+            color: #4fc3f7;
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .attachment-text {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            line-height: 1.7;
+            white-space: pre-line;
+        }
+        
+        .diary-entry {
+            background-color: rgba(40, 30, 20, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .diary-date {
+            color: #ff9800;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .classified {
+            color: #ff6b6b;
+            font-weight: bold;
+            animation: blinkClassified 2s infinite;
+        }
+        
+        @keyframes blinkClassified {
+            0% {
+                opacity: 0.3;
+                color: #ccc;
+            }
+            50% {
+                opacity: 1;
+                color: #ff6b6b;
+            }
+            100% {
+                opacity: 0.3;
+                color: #ccc;
+            }
+        }
+        
+        footer {
+            background-color: rgba(20, 30, 40, 0.95);
+            backdrop-filter: blur(8px);
+            border-top: 2px solid rgba(79, 195, 247, 0.2);
+            color: #4fc3f7;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding: 70px 15px 30px;
+            }
+            
+            .attachment-header h1 {
+                font-size: 2em;
+            }
+            
+            .attachment-content {
+                padding: 25px;
+            }
+            
+            .attachment-section h2 {
+                font-size: 1.6em;
+            }
+            
+            .back-button {
+                position: absolute;
+                top: 70px;
+                left: 10px;
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="stockston.html" class="back-button">← Powrót do Raportu</a>
+    
+
+    
+    <main>
+        <div class="attachment-header">
+            <h1>Załącznik 3</h1>
+            <div class="subtitle">Wynik oględzin domu Williama Stocktona, kopia pamiętnika znalezionego na strychu oraz dokumentacja dotycząca kamery</div>
+            <div class="ref">Załącznik do raportu: KC/INS/2023/31-10/STOCKTON | Data: 31 października 2023</div>
+        </div>
+        
+        <div class="attachment-content">
+            <div class="attachment-section">
+                <h2>Wynik oględzin domu Williama Stocktona</h2>
+                <div class="attachment-text">
+Miejsce: ulica [nienazwana]
+Data oględzin: 31 października 2023
+Przeprowadzili: inspektor Kairski oraz detektyw Valentino
+
+Spis pomieszczeń:
+- salon z kominkiem oraz kuchnią
+- schody
+- strych
+- sypialna
+- toaleta
+
+Uwagi co do niektórych pomieszczeń:
+- Toaleta nie ma wanny czy prysznica
+- Strych nie jest na strychu, jest zakurzony, znaleziono w nim czaszkę, zgniłe mięso, kości i książki, w tym pamiętniki kluczowe dla sprawy
+- W kuchni znaleziono duże ilości jedzenia, szczególnie chleba
+                </div>
+            </div>
+            
+            <div class="attachment-section">
+                <h2>Fragmenty pamiętnika znalezionego na strychu</h2>
+                
+                <div class="diary-entry">
+                    <div class="diary-date">15 września 2023</div>
+                    Dzisiaj w końcu zdobyłem ją. Tę legendarną kamerę Polaroid. Mówią, że ma moc utrwalania nie tylko obrazów, ale i dusz. Odebrałem ją od starego włamywacza za pół darmo. Nie pytał wiele. Nie musiał wiedzieć, co zamierzam z nią zrobić.
+                </div>
+                
+                <div class="diary-entry">
+                    <div class="diary-date">22 września 2023</div>
+                    Eksperymenty idą lepiej niż się spodziewałem. Kamera nie tylko robi zdjęcia. Ona... przechowuje. Wczoraj sfotografowałem stare drzewo na cmentarzu. Dziś na zdjęciu widać coś więcej niż drzewo. Twarz? Może to tylko moja wyobraźnia.
+                </div>
+                
+                <div class="diary-entry">
+                    <div class="diary-date">5 października 2023</div>
+                    Oni myślą, że nie widze. Te astańskie świnie obserwują mój dom. Myślą, że nie wiem o ich istnieniu. Ale ja wiem. I mam plan. Jeśli chcą mnie złapać, zapłacą za to wysoką cenę. Kamera jest gotowa.
+                </div>
+                
+                <div class="diary-entry">
+                    <div class="diary-date">28 października 2023</div>
+                    Wszystko jest przygotowane. Pułapki w domu, kamera naładowana. Jeśli przyjdą, zrobię im zdjęcie. Niech zostaną tam na zawsze, uwięzieni w kadrze, tak jak wszyscy inni, którzy stanęli mi na drodze. To będzie moje największe dzieło.
+                </div>
+            </div>
+            
+            <div class="attachment-section">
+                <h2>Dokumentacja dotycząca kamery</h2>
+                <div class="attachment-text">
+- Model: Polaroid SX-70 Land Camera
+- Numer seryjny: <span class="classified">[USUNIĘTE Z POWODÓW BEZPIECZEŃSTWA]</span>
+- Rok produkcji: 1974
+- Stan: Zachowany w dobrym stanie, widoczne ślady modyfikacji
+- Uwagi: Kamera wykazuje nietypowe właściwości, prawdopodobnie została zmodyfikowana w nielegalny sposób
+- Miejsce znalezienia: opuszczony dom przy ulicy [nienazwana]
+- Status prawny: zabytkowa kamera o znaczeniu historycznym, nielegalnie przywłaszczona przez Williama Stocktona
+
+
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; padding: 15px; background-color: rgba(0, 0, 0, 0.5); border-radius: 5px; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: #ff6b6b; font-weight: bold; font-size: 0.9em;">
+                DOKUMENT POUFNY - ZAŁĄCZNIK<br>
+                KLASYFIKACJA: STRZEŻONY<br>
+                DOSTĘP: TYLKO DLA UPOWAŻNIONYCH PRACOWNIKÓW KC
+            </p>
+        </div>
+    </main>
+    
+</body>
+</html>

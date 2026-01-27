@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub Inspekcji - Archiwum Astany</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Styl dla hub inspekcji */
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('hub-bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .top-bar {
+            background-color: rgba(51, 51, 51, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        main {
+            padding-top: 60px;
+        }
+        
+        .hub-header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 40px;
+        }
+        
+        .hub-header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #4fc3f7;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hub-header p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .hub-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 0 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hub-item {
+            width: calc(50% - 15px);
+            max-width: 500px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hub-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-color: rgba(79, 195, 247, 0.3);
+        }
+        
+        .hub-item a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .hub-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .hub-item figcaption {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            background-color: rgba(44, 62, 80, 0.8);
+            color: #4fc3f7;
+        }
+        
+        .hub-item p {
+            padding: 15px 20px;
+            color: #ccc;
+            line-height: 1.5;
+            font-size: 1em;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 1001;
+            background-color: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .back-button:hover {
+            background-color: rgba(44, 62, 80, 1);
+        }
+        
+        footer {
+            background-color: rgba(44, 62, 80, 0.9);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .hub-item {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .hub-header h1 {
+                font-size: 2.2em;
+            }
+            
+            .hub-header p {
+                font-size: 1em;
+            }
+            
+            .back-button {
+                position: absolute;
+                top: 70px;
+                left: 10px;
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hub-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .hub-item figcaption {
+                font-size: 1.1em;
+                padding: 15px;
+            }
+            
+            .hub-item p {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            
+            .hub-item img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Przycisk powrotu -->
+    <a href="../menu.html" class="back-button">← Powrót</a>
+    
+    <header class="top-bar">
+        <h1>Hub Inspekcji</h1>
+    </header>
+    
+    <main>
+        <div class="hub-header">
+            <h1>Centrum Inspekcji i Monitoringu</h1>
+            <p>System zarządzania danymi, audytami i kontrolą bezpieczeństwa. Dostęp do zaawansowanych narzędzi analitycznych i raportów operacyjnych.</p>
+        </div>
+        
+        <div class="hub-grid">
+            <div class="hub-item">
+                <a href="#monitoring">
+                    <img src="../images/monitoring.jpg" alt="System Monitorowania">
+                    <figcaption>System Monitorowania</figcaption>
+                    <p>Zaawansowany system śledzenia aktywności w czasie rzeczywistym z alertami bezpieczeństwa.</p>
+                </a>
+            </div>
+            
+            <div class="hub-item">
+                <a href="#raporty">
+                    <img src="../images/raporty.jpg" alt="Raporty Inspekcyjne">
+                    <figcaption>Raporty Inspekcyjne</figcaption>
+                    <p>Kompletna dokumentacja z przeprowadzonych inspekcji, audytów i kontroli bezpieczeństwa.</p>
+                </a>
+            </div>
+            
+            <div class="hub-item">
+                <a href="#baza">
+                    <img src="../images/baza.jpg" alt="Baza Danych">
+                    <figcaption>Baza Danych</figcaption>
+                    <p>Centralny magazyn dokumentów, archiwów i zasobów inspekcyjnych z zaawansowanym wyszukiwaniem.</p>
+                </a>
+            </div>
+            
+            <div class="hub-item">
+                <a href="#analiza">
+                    <img src="../images/analiza.jpg" alt="Narzędzia Analizy">
+                    <figcaption>Narzędzia Analizy</figcaption>
+                    <p>Specjalistyczne oprogramowanie do analizy danych, wykrywania anomalii i prognozowania trendów.</p>
+                </a>
+            </div>
+            
+            <div class="hub-item">
+                <a href="#alarm">
+                    <img src="../images/alarm.jpg" alt="System Alarmowy">
+                    <figcaption>System Alarmowy</figcaption>
+                    <p>Automatyczny system powiadomień o nietypowych zdarzeniach i naruszeniach bezpieczeństwa.</p>
+                </a>
+            </div>
+            
+            <div class="hub-item">
+                <a href="#dashboard">
+                    <img src="../images/dashboard.jpg" alt="Dashboard Kontrolny">
+                    <figcaption>Dashboard Kontrolny</figcaption>
+                    <p>Personalizowany panel kontrolny z kluczowymi metrykami i szybkim dostępem do funkcji systemu.</p>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Sekcje dla poszczególnych hub-itemów -->
+        <section id="monitoring" style="padding: 60px; background-color: rgba(0, 0, 0, 0.8);">
+            <h2>System Monitorowania</h2>
+            <p>Treść dotycząca systemu monitorowania...</p>
+        </section>
+        
+        <section id="raporty" style="padding: 60px; background-color: rgba(0, 0, 0, 0.8);">
+            <h2>Raporty Inspekcyjne</h2>
+            <p>Treść dotycząca raportów inspekcyjnych...</p>
+        </section>
+        
+        <!-- Dodaj pozostałe sekcje... -->
+    </main>
+    
+    <footer>
+        <p>&copy; 2026 Hub Inspekcji - Archiwum Astany</p>
+        <p>Poziom dostępu: INS-PEK-CJA | Status: AKTYWNY</p>
+    </footer>
+</body>
+</html>

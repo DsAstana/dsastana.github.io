@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raport: Sprawa Williama Stocktona - Hub Inspekcji</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styl dla strony raportu */
+        body {
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)),
+                url('images/inspektor.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .top-bar {
+            background-color: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        main {
+            padding-top: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 1001;
+            background-color: rgba(44, 62, 80, 0.95);
+            color: #4fc3f7;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 1.1em;
+        }
+        
+        .back-button:hover {
+            background-color: rgba(79, 195, 247, 0.2);
+            transform: translateX(-5px);
+            border-color: rgba(79, 195, 247, 0.6);
+            color: #fff;
+        }
+        
+        .report-header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        .report-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #4fc3f7;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+        
+        .report-header .subtitle {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            opacity: 0.9;
+        }
+        
+        .report-header .date {
+            font-size: 1em;
+            color: #ccc;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .report-content {
+            background-color: rgba(20, 30, 40, 0.9);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .report-section {
+            margin-bottom: 40px;
+        }
+        
+        .report-section h2 {
+            color: #4fc3f7;
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .report-section h3 {
+            color: #4fc3f7;
+            margin: 25px 0 10px 0;
+            font-size: 1.4em;
+        }
+        
+        .report-text {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        
+        .page-number {
+            text-align: right;
+            font-style: italic;
+            color: #888;
+            margin-top: 30px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .attachments {
+            background-color: rgba(30, 40, 50, 0.9);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+        }
+        
+        .attachments h2 {
+            color: #4fc3f7;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        
+        .attachment-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .attachment-item {
+            background-color: rgba(40, 50, 60, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(79, 195, 247, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .attachment-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(79, 195, 247, 0.3);
+            background-color: rgba(50, 60, 70, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .attachment-item h3 {
+            color: #4fc3f7;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .attachment-item p {
+            color: #ccc;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        
+        .attachment-link {
+            display: inline-block;
+            background-color: rgba(79, 195, 247, 0.2);
+            color: #4fc3f7;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        .attachment-link:hover {
+            background-color: rgba(79, 195, 247, 0.4);
+            color: #fff;
+        }
+        
+        .votum-separatum {
+            background-color: rgba(50, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            animation: secretPulse 2s infinite;
+        }
+        
+        .votum-separatum h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .votum-separatum p {
+            color: #ff9999;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .votum-link {
+            display: inline-block;
+            background-color: rgba(255, 0, 0, 0.2);
+            color: #ff6b6b;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .votum-link:hover {
+            background-color: rgba(255, 0, 0, 0.4);
+            color: #fff;
+        }
+        
+        footer {
+            background-color: rgba(20, 30, 40, 0.95);
+            backdrop-filter: blur(8px);
+            border-top: 2px solid rgba(79, 195, 247, 0.2);
+            color: #4fc3f7;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        /* Animacje */
+        @keyframes secretPulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.3); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .classified {
+            color: #ff6b6b;
+            font-weight: bold;
+            animation: blink 200.5s infinite;
+        }
+        
+        /* Responsywność */
+        @media (max-width: 768px) {
+            main {
+                padding: 70px 15px 30px;
+            }
+            
+            .report-header h1 {
+                font-size: 2em;
+            }
+            
+            .report-content {
+                padding: 25px;
+            }
+            
+            .report-section h2 {
+                font-size: 1.6em;
+            }
+            
+            .attachment-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-button {
+                position: absolute;
+                top: 70px;
+                left: 10px;
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .report-header h1 {
+                font-size: 1.7em;
+            }
+            
+            .report-header .subtitle {
+                font-size: 1em;
+            }
+            
+            .report-content {
+                padding: 20px;
+            }
+            
+            .report-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Przycisk powrotu -->
+    <a href="hub_inspekcji.html" class="back-button">← Powrót do Hubu</a>
+    
+
+    
+    <main>
+        <div class="report-header">
+            <h1>Raport dla KC w sprawie inspekcji z dnia 31 października 2023</h1>
+            <div class="subtitle">Sprawa dziennikarza "śledczego" Williama Stocktona</div>
+            <div class="date">Data sporządzenia: 1 listopada 2023 | Numer raportu: KC/INS/2023/31-10/STOCKTON</div>
+        </div>
+        
+        <div class="report-content">
+            <div class="report-section">
+                <h2>Wstęp</h2>
+                <div class="report-text">
+                    <p>Celem inspektora Kairskiego oraz detektywa Valentino było przeprowadzenie inspekcji domu zachodniego dziennikarza "śledczego" Williama Stocktona podejrzewanego o antyastańskie działania oraz jego najbliższej okolicy.</p>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <h2>Streszczenie wydarzeń z udziałem obu funkcjonariuszy</h2>
+                <div class="report-text">
+                    <p>1. Inspektor Kairski oraz detektyw Valentino zaczęli od przejrzenia strychu podejrzanego gdzie znaleźli czyjś pamiętnik. Zawierał on informację o jego pasji do fotografii oraz nielegalnym przywłaszczeniu zabytkowej kamery którego dokonał <span class="classified">[patrz załącznik 3]</span>.</p>
+                    
+                    <p>2. Funkcjonariusze zjedli śniadanie złożone z podkładu do pizzy przygotowanego przez insp. Kairskiego oraz chleba z kuchni.</p>
+                    
+                    <p>3. Dokonali oględzin ulicy zanotowawszy: co najmniej 3 opuszczone domy, przystanek autobusowy, tunel drogowy oraz podziemną stację PKP, 2 domy zamieszkałe (licząc dom podejrzanego), tablica ogłoszeń, kabinę w lesie wystawioną na sprzedaż <span class="classified">[patrz załącznik 1]</span>.</p>
+                    
+                    <p>4. Przeprowadzili rozmowę z sąsiadem podejrzanego <span class="classified">[patrz załącznik 2]</span>.</p>
+                    
+                    <p>5. Udali się do kabiny w lesie, za którą znaleziono opuszczony cmentarz, ślady przecieru pomidorowego.</p>
+
+                    <p>6. Po wejściu do piwnicy kabiny miało dojść do zdarzeń paranormalnych prawdopodobnie wywołanych babilońskim dopalaczem.</p>
+                    
+                    <p>7. Trafili do opuszczonego domu gdzie znaleźli zabytkową kamerę Polaroid używaną i zawłaszczoną przez dziennikarza.</p>
+
+                    <p>8. [Zdarzenia paranormalne]</p>
+					
+                    <p>9. Udali się na przystanek autobusowy gdzie mieli na kogoś czekać. </p>
+					
+                    <p>10. [Zdarzenia paranormalne]</p>
+					
+                    <p>11. [Zdarzenia paranormalne] w trakcie których rzeczony dziennikarz miał próbować im pokazać propagandowy film antyastański jego autorstwa.</p>
+
+                    <p>12. Pobudka w domu dziennikarza i [Zdarzenia paranormalne]  </p>
+
+                    <p>13. Funkcjonariusze udali się na stację PKP gdzie doszło do [Zdarzenia paranormalne] co można stwierdzić po natknięciu się na najmilszego konduktora na świecie który jedynie krzyczał na V. za opóźnianie pociągu </p>
+
+                    <p>14.[Zdarzenia normalne] Powrót do rzeczywistości, natknięcie się na szkielet pasażera PKP którego zabiły opóźnienia.</p>
+					
+                    <p>15. [Zdarzenia paranormalne] w trakcie których William Stockton robi zdjęcie funkcjonariuszom za pomocą kamery czym miał ich uwięzić w tej kamerze </p>
+					
+                    <p>16. Funkcjonariusze po tym ujrzeli Propagandowy film antyastański "Śmierć Williama Stocktona" 
+autorstwa dziennikarza w którym po krótce opisuje się jego życie i pasę fotografii. Występują w nim 
+stwierdzenia że poświęcił swoje życie oraz o opresji astańskiej niepozwalającej swobodnie fotografować i 
+uprawiać dziennikarstwa niewinnym ludziom </p>
+					
+                    <p>17. Widzą nieznaną osobę która zabiera kamerę Polaroid</p>
+                    
+                    <div class="page-number">Strona 1 z 2</div>
+                </div>
+            </div>
+            
+            <div class="report-section">
+                <h2>Zalecenia dla KC</h2>
+                <div class="report-text">
+                    <h3>W sprawie dziennikarza "śledczego" Williama Stocktona</h3>
+                    <p><strong>Niezwłoczne aresztowanie, przeprowadzenie śledztwa i postawienia go przed sądem.</strong></p>
+                    
+                    <h3>W sprawie prawdopodobnego dopalacza babilońskiego</h3>
+                    <p><strong>Próba identyfikacji i zbadania tej substancji, ochrona i monitoring rzeki Niebieskiej przed zatruciem.</strong></p>
+                    
+                    <div class="page-number">Strona 2 z 2</div>
+                </div>
+            </div>
+            
+
+        </div>
+        
+        <!-- Sekcja załączników -->
+        <div class="attachments">
+            <h2>Załączniki do raportu</h2>
+            <div class="attachment-list">
+                <div class="attachment-item">
+                    <h3>Załącznik 1</h3>
+                    <p>Fotografie i dokumentacja kabiny w lesie wystawionej na sprzedaż wraz z otoczeniem.</p>
+                    <a href="zalacznik1.html" class="attachment-link">Otwórz załącznik →</a>
+                </div>
+                
+                <div class="attachment-item">
+                    <h3>Załącznik 2</h3>
+                    <p>Transkrypt rozmowy z sąsiadem Williama Stocktona oraz notatki z wywiadu.</p>
+                    <a href="zalacznik2.html" class="attachment-link">Otwórz załącznik →</a>
+                </div>
+                
+                <div class="attachment-item">
+                    <h3>Załącznik 3</h3>
+                    <p>Kopia pamiętnika znalezionego na strychu oraz dokumentacja dotycząca nielegalnego przywłaszczenia zabytkowej kamery.</p>
+                    <a href="zalacznik3.html" class="attachment-link">Otwórz załącznik →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sekcja votum separatum -->
+        <div class="votum-separatum">
+            <h2>Votum Separatum</h2>
+            <p>Dokument zawierający odrębne stanowisko oraz dodatkowe uwagi nieujęte w głównym raporcie. Materiał poufny, dostęp wyłącznie dla upoważnionych osób.</p>
+            <a href="votum_separatum.html" class="votum-link">Dostęp do Votum Separatum →</a>
+        </div>
+        
+        <!-- Informacja o poufności -->
+        <div style="text-align: center; margin-top: 40px; padding: 15px; background-color: rgba(0, 0, 0, 0.5); border-radius: 5px; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: #ff6b6b; font-weight: bold; font-size: 0.9em;">
+                DOKUMENT POUFNY<br>
+                KLASYFIKACJA: STRZEŻONY<br>
+                DOSTĘP: TYLKO DLA UPOWAŻNIONYCH PRACOWNIKÓW KC
+            </p>
+        </div>
+    </main>
+    
+</body>
+</html>
