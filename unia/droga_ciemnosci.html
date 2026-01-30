@@ -1,0 +1,695 @@
+<style>
+    body {
+        background: 
+            radial-gradient(ellipse at 30% 20%, rgba(15, 5, 25, 0.95) 0%, rgba(0, 0, 0, 1) 70%),
+            url('images/ud_tlo.png') no-repeat center center fixed;
+        background-size: cover;
+        color: #a0a0a0;
+        min-height: 100vh;
+        font-family: 'Crimson Text', 'Times New Roman', serif;
+        line-height: 1.7;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    }
+    
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 1px,
+                rgba(30, 0, 50, 0.15) 1px,
+                rgba(30, 0, 50, 0.15) 2px
+            ),
+            radial-gradient(circle at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
+        pointer-events: none;
+        z-index: -2;
+        opacity: 0.4;
+    }
+    
+    main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 30px 20px;
+        position: relative;
+    }
+    
+    .back-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+        background-color: rgba(25, 0, 40, 0.85);
+        color: #9d0000;
+        padding: 12px 24px;
+        border-radius: 3px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(157, 0, 0, 0.4);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.8);
+        font-family: 'Cinzel', serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 0.9em;
+        backdrop-filter: blur(5px);
+    }
+    
+    .back-button:hover {
+        background-color: rgba(157, 0, 0, 0.4);
+        transform: translateX(-5px);
+        border-color: rgba(255, 30, 30, 0.7);
+        color: #ff4444;
+        box-shadow: 0 5px 20px rgba(157, 0, 0, 0.5);
+        text-shadow: 0 0 12px rgba(255, 30, 30, 0.7);
+    }
+    
+    .article-header {
+        text-align: center;
+        padding: 80px 20px 60px;
+        margin-bottom: 50px;
+        background: 
+            linear-gradient(to bottom, 
+                transparent, 
+                rgba(15, 0, 25, 0.8) 30%, 
+                rgba(15, 0, 25, 0.95) 70%,
+                rgba(15, 0, 25, 1) 100%),
+        border-radius: 0 0 20px 20px;
+        border-bottom: 4px solid #9d0000;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+    }
+    
+    .article-header::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 4px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            #9d0000, 
+            #660000, 
+            #9d0000, 
+            transparent
+        );
+        box-shadow: 
+            0 0 25px rgba(157, 0, 0, 0.8),
+            0 0 50px rgba(157, 0, 0, 0.4);
+    }
+    
+    .article-header h1 {
+        font-size: 3.5em;
+        margin-bottom: 20px;
+        color: #9d0000;
+        text-shadow: 
+            0 0 15px rgba(157, 0, 0, 0.8),
+            0 0 30px rgba(157, 0, 0, 0.6),
+            0 0 45px rgba(157, 0, 0, 0.4),
+            3px 3px 6px rgba(0, 0, 0, 0.95);
+        letter-spacing: 3px;
+        font-weight: 700;
+        font-family: 'Cinzel', serif;
+        text-transform: uppercase;
+        position: relative;
+        animation: titleGlow 4s infinite alternate;
+    }
+    
+    @keyframes titleGlow {
+        0% {
+            text-shadow: 
+                0 0 15px rgba(157, 0, 0, 0.8),
+                0 0 30px rgba(157, 0, 0, 0.6),
+                0 0 45px rgba(157, 0, 0, 0.4),
+                3px 3px 6px rgba(0, 0, 0, 0.95);
+        }
+        50% {
+            text-shadow: 
+                0 0 20px rgba(255, 30, 30, 0.9),
+                0 0 40px rgba(157, 0, 0, 0.7),
+                0 0 60px rgba(157, 0, 0, 0.5),
+                3px 3px 6px rgba(0, 0, 0, 0.95);
+        }
+    }
+    
+    .article-header .subtitle {
+        font-size: 1.4em;
+        color: #c0c0c0;
+        margin-bottom: 15px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        font-style: italic;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+    }
+    
+    .article-header .date {
+        font-size: 1.1em;
+        color: #888;
+        font-style: italic;
+        margin-top: 20px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+        position: relative;
+        display: inline-block;
+        padding: 0 25px;
+    }
+    
+    .article-header .date::before,
+    .article-header .date::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9d0000;
+        opacity: 0.7;
+        font-size: 0.9em;
+    }
+    
+    .article-header .date::before {
+        left: 0;
+    }
+    
+    .article-header .date::after {
+        right: 0;
+    }
+    
+    .article-content {
+        background-color: rgba(8, 0, 15, 0.9);
+        border-radius: 12px;
+        padding: 60px 50px;
+        margin-bottom: 50px;
+        border: 2px solid rgba(157, 0, 0, 0.25);
+        box-shadow: 
+            inset 0 0 60px rgba(0, 0, 0, 0.7),
+            0 15px 50px rgba(0, 0, 0, 0.9);
+        position: relative;
+    }
+    
+    .article-content::before {
+        content: '';
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        border: 1px solid rgba(157, 0, 0, 0.15);
+        border-radius: 6px;
+        pointer-events: none;
+    }
+    
+    .section-divider {
+        height: 2px;
+        background: linear-gradient(90deg, 
+            rgba(157, 0, 0, 0.3), 
+            rgba(157, 0, 0, 0.7), 
+            rgba(157, 0, 0, 0.9), 
+            rgba(157, 0, 0, 0.7), 
+            rgba(157, 0, 0, 0.3)
+        );
+        margin: 70px 0;
+        border: none;
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 0 15px rgba(157, 0, 0, 0.3);
+    }
+    
+
+    
+
+    
+    .section-title {
+        text-align: center;
+        color: #9d0000;
+        margin: 60px 0 50px 0;
+        font-size: 2.5em;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: 'Cinzel', serif;
+        position: relative;
+        padding: 25px 0;
+    }
+    
+
+    
+    .article-text {
+        color: #c0c0c0;
+        font-size: 1.2em;
+        line-height: 1.8;
+        margin-bottom: 35px;
+        text-align: justify;
+        position: relative;
+        padding-left: 25px;
+        border-left: 3px solid rgba(157, 0, 0, 0.4);
+    }
+    
+    .article-text::first-letter {
+        color: #9d0000;
+        font-size: 2.2em;
+        font-weight: bold;
+        float: left;
+        line-height: 0.8;
+        margin-right: 8px;
+        margin-top: 8px;
+        text-shadow: 
+            1px 1px 3px rgba(0, 0, 0, 0.9),
+            0 0 8px rgba(157, 0, 0, 0.5);
+    }
+    
+    .intro-text {
+        color: #d0d0d0;
+        font-size: 1.4em;
+        line-height: 1.9;
+        text-align: center;
+        margin: 60px auto;
+        max-width: 800px;
+        padding: 45px;
+        background: rgba(12, 0, 22, 0.7);
+        border-radius: 8px;
+        border: 2px solid rgba(157, 0, 0, 0.4);
+        box-shadow: 
+            inset 0 0 40px rgba(0, 0, 0, 0.7),
+            0 10px 30px rgba(0, 0, 0, 0.8);
+        font-style: italic;
+        position: relative;
+    }
+    
+    .intro-text::before,
+    .intro-text::after {
+        content: '';
+        position: absolute;
+        color: #9d0000;
+        font-size: 4.5em;
+        opacity: 0.4;
+        font-family: serif;
+        text-shadow: 0 0 15px rgba(157, 0, 0, 0.5);
+    }
+    
+    .intro-text::before {
+        top: 15px;
+        left: 25px;
+    }
+    
+    .intro-text::after {
+        bottom: 15px;
+        right: 25px;
+    }
+    
+    .image-container {
+        text-align: center;
+        margin: 60px 0;
+        position: relative;
+        filter: contrast(1.1) brightness(0.85) sepia(0.35) hue-rotate(-15deg);
+        transition: all 0.5s ease;
+    }
+    
+    .image-container:hover {
+        filter: contrast(1.15) brightness(0.75) sepia(0.45) hue-rotate(-20deg);
+    }
+    
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        border: 3px solid rgba(157, 0, 0, 0.4);
+        box-shadow: 
+            0 15px 40px rgba(0, 0, 0, 0.9),
+            inset 0 0 30px rgba(0, 0, 0, 0.8);
+        transition: all 0.5s ease;
+    }
+    
+    .image-container:hover img {
+        border-color: rgba(255, 40, 40, 0.6);
+        box-shadow: 
+            0 20px 50px rgba(157, 0, 0, 0.5),
+            inset 0 0 40px rgba(0, 0, 0, 0.9);
+        transform: scale(1.02);
+    }
+    
+    .image-container::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        height: 15px;
+        background: radial-gradient(ellipse at center, 
+            rgba(157, 0, 0, 0.5) 0%, 
+            transparent 80%);
+        filter: blur(8px);
+    }
+    
+    .audio-container {
+        text-align: center;
+        margin: 50px 0;
+        padding: 25px;
+        background: rgba(12, 0, 22, 0.7);
+        border-radius: 8px;
+        border: 2px solid rgba(157, 0, 0, 0.4);
+        box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6);
+    }
+    
+    audio {
+        width: 100%;
+        max-width: 600px;
+        filter: invert(1) sepia(1) hue-rotate(300deg) saturate(3.5) brightness(0.65) contrast(1.8);
+    }
+    
+    audio::-webkit-media-controls-panel {
+        background: rgba(225, 110, 140, 0.85);
+        border-radius: 5px;
+    }
+    
+    .postulate {
+        margin: 35px 0;
+        padding: 30px;
+        background: rgba(18, 0, 30, 0.75);
+        border-radius: 5px;
+        border-left: 5px solid #9d0000;
+        position: relative;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    }
+    
+    .postulate:hover {
+        background: rgba(22, 0, 35, 0.85);
+        border-left-color: #ff3333;
+        transform: translateX(8px);
+        box-shadow: 
+            0 12px 25px rgba(157, 0, 0, 0.4),
+            inset 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .postulate h4 {
+        color: #9d0000;
+        margin: 0 0 18px 0;
+        font-size: 1.5em;
+        font-weight: bold;
+        font-family: 'Cinzel', serif;
+        letter-spacing: 1px;
+        position: relative;
+        padding-left: 35px;
+    }
+    
+    .postulate h4::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        color: #9d0000;
+        opacity: 0.8;
+        font-size: 1.2em;
+    }
+    
+    .postulate p {
+        color: #d0d0d0;
+        margin: 0;
+        font-size: 1.2em;
+        line-height: 1.7;
+        padding-left: 35px;
+    }
+    
+    .author-signature {
+        text-align: right;
+        margin-top: 90px;
+        padding-top: 35px;
+        border-top: 2px solid rgba(157, 0, 0, 0.4);
+        position: relative;
+    }
+    
+    .author-signature::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: 0;
+        width: 150px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #9d0000);
+        box-shadow: 0 0 15px rgba(157, 0, 0, 0.5);
+    }
+    
+    .author-signature p {
+        color: #9d0000;
+        font-size: 2em;
+        font-style: italic;
+        font-weight: bold;
+        letter-spacing: 3px;
+        text-shadow: 
+            0 0 15px rgba(157, 0, 0, 0.6),
+            0 0 30px rgba(157, 0, 0, 0.4),
+            3px 3px 5px rgba(0, 0, 0, 0.95);
+        font-family: 'Cinzel', serif;
+        position: relative;
+        display: inline-block;
+        padding: 15px 40px;
+        background: rgba(12, 0, 22, 0.6);
+        border-radius: 5px;
+        border: 1px solid rgba(157, 0, 0, 0.3);
+    }
+    
+    .author-signature p::after {
+        content: '';
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9d0000;
+        opacity: 0.6;
+        font-size: 1.5em;
+    }
+    
+
+    
+    /* Dodatkowe cienie dla głębszej atmosfery */
+    .deep-shadows {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -2;
+        background: 
+            radial-gradient(circle at 80% 90%, rgba(0, 0, 0, 0.9) 0%, transparent 10%),
+            radial-gradient(circle at 20% 90%, rgba(0, 0, 0, 0.8) 0%, transparent 20%),
+            radial-gradient(circle at 50% 10%, rgba(0, 0, 0, 0.7) 0%, transparent 30%);
+    }
+    
+    /* Responsywność */
+    @media (max-width: 768px) {
+        main {
+            padding: 20px 15px;
+        }
+        
+        .article-header {
+            padding: 50px 15px 40px;
+        }
+        
+        .article-header h1 {
+            font-size: 2.5em;
+        }
+        
+        .article-header .subtitle {
+            font-size: 1.2em;
+        }
+        
+        .article-content {
+            padding: 40px 30px;
+        }
+        
+        .section-title {
+            font-size: 2em;
+        }
+        
+        .section-divider {
+            width: 90%;
+            margin: 50px auto;
+        }
+        
+        .article-text {
+            font-size: 1.1em;
+            padding-left: 20px;
+        }
+        
+        .intro-text {
+            font-size: 1.2em;
+            padding: 30px;
+        }
+        
+        .back-button {
+            top: 15px;
+            left: 15px;
+            padding: 10px 20px;
+            font-size: 0.85em;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .article-header h1 {
+            font-size: 2em;
+            letter-spacing: 2px;
+        }
+        
+        .article-header .subtitle {
+            font-size: 1em;
+        }
+        
+        .article-content {
+            padding: 30px 20px;
+        }
+        
+        .section-title {
+            font-size: 1.6em;
+        }
+        
+        .section-title::before,
+        .section-title::after {
+            width: 80px;
+        }
+        
+        .section-title::before {
+            left: calc(50% - 90px);
+        }
+        
+        .section-title::after {
+            right: calc(50% - 90px);
+        }
+        
+        .article-text {
+            font-size: 1em;
+            text-align: left;
+        }
+        
+        .intro-text {
+            font-size: 1.1em;
+            padding: 20px;
+        }
+        
+        .postulate {
+            padding: 20px;
+        }
+        
+        .postulate h4 {
+            font-size: 1.2em;
+        }
+    }
+</style>
+
+<!-- Efekty wizualne -->
+<div class="deep-shadows"></div>
+<div class="candle-flicker"></div>
+
+<!-- Przycisk powrotu -->
+<a href="hub_unii.html" class="back-button">← Powrót z Ciemności</a>
+
+<main>
+    <div class="article-header">
+        <h1>Droga Ciemności</h1>
+        <div class="subtitle">Analiza sytuacji politycznej Rzeczpospolitej</div>
+        <div class="date">Opublikowano: 18 września 2024 | Autor: Duch Kairu</div>
+    </div>
+    
+    <div class="article-content">
+        <div class="audio-container">
+            <audio controls>
+                <source src="https://www.fesliyanstudios.com/download-link.php?src=i&id=3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        
+        <p class="intro-text">
+            Przez chwilę wydawało się że idziemy wyłącznie drogą skąpaną w słońcu, a to co na horyzoncie widzieliśmy wyraźnie jakby było tuż przed oczyma. Jednak przed nami nie ma pewnej przystani. Teraz możemy zobaczyć że przez naszą niegdyś słoneczna trasę przemyka coraz więcej cieni. Tak naprawdę nigdy nie była ona jasna. Rzeczpospolita zmierza teraz w stronę szarości, a z czasem może i zupełnej ciemności.
+        </p>
+        
+        <div class="section-divider"></div>
+        
+        <div class="image-container">
+            <img src="https://i.ibb.co/v1NnDYS/536f1f8b-efe9-4977-b1ac-681482e9548b.png" alt="Symbol ciemności" />
+        </div>
+        
+        <h2 class="section-title">Kryptokracja</h2>
+        
+        <div class="article-text">
+            <p>Być może pamiętasz artykuł sprzed paru tygodni który powiadamiał o utworzeniu specjalnego komitetu który zajmie się opracowaniem tzw. "konstytucji"? Jeśli odpowiedź brzmi nie to dlatego że od tego czasu sprawa ucichła. Wiele osób w tym ja było przekonanych że zakończyło się fiaskiem, być może nawet nic takiego nie powstało.</p>
+            
+            <p>Jakież moje było zdumienie gdy dowiedziałem się że komitet nie tylko powstał ale i obraduje w najlepsze! Czy wiemy kto do niej należy? Nie. Czy wiemy czym się w rzeczywistości zajmuje? Nie, obrady są tajne. Wiemy jedynie że coś takiego istnieje choć i z tą jedną informacją się nie afiszują. Z czym zatem mamy tutaj do czynienia? Potajemnie działa nieznana obywatelom instytucja której celem jest urządzenie nam życia w Polsce. Czy możemy jej zaufać? Czy celem jest dobro nas wszystkich? Próba pozostania w cieniu i dyskretne metody działania wskazują że nie.</p>
+        </div>
+        
+        <div class="section-divider"></div>
+        
+        <div class="image-container">
+            <img src="https://i.ibb.co/cyM1G6W/720px-Lycurgus-Giving-Law-to-the-People-Jacopo-Palma-or-Bonifazio-de-Pitati.jpg" alt="Oligarchia" />
+        </div>
+        
+        <h2 class="section-title">Oligarchia</h2>
+        
+        <div class="article-text">
+            <p>Następstwem systemu skrytego sprawowania władzy który jak na to wskazuje działalność tajemniczego "komitetu" powoli rozwija się w Polsce będzie oligarchizacja. Zapewne decyzja o jego rozwoju ma na celu kontrolowanie władzy nawet gdy w końcu zostanie wprowadzona obiecana demokracja tj. system republiki, bowiem w monarchii/dyktaturze nie ma potrzeby aż tak kontrolować lud władza jest stała, zagrozić można jej tylko siłą.</p>
+            
+            <p>Mieliśmy już kiedyś do czynienia z systemem oligarchicznym w rrPolsce. Oficjalnie byliśmy republiką, a wybory były wolne, wszystko w teorii. W praktyce władzę sprawowała wąska grupa osób, wybory służyły tylko wymienianiu osoby z kliki która oficjalnie sprawuje władzę. Opozycjoniści wobec oligarchów byli represjonowani i często byli zmuszeni do życia za granicą, osoby nazywające system po imieniu otrzymywały łatkę trolli i spiskowców.</p>
+            
+            <p>Czar prysł gdy demokracja nie poszła po myśli rządzącego układu, ZenIR cudem pokonał kandydata oligarchów jednym głosem w wyborach prezydenckich. Ich reakcja była drastyczna: kontrolowany przez oligarchów parlament przekazał regiony z partiami spoza układu do bufora i ponowił wybory dzięki czemu odzyskał władzę. Całą sytuację wykorzystał jako pretekst Jakub Parol który najechał Rzeczpospolitą zapowiadając przywrócenie demokracji. Oczywiście do niczego takiego nie doszło, kraj podzielono i rozbity trwa do dziś.</p>
+        </div>
+        
+        <div class="section-divider"></div>
+        
+        <h2 class="section-title">Unia Demokratyczna</h2>
+        
+        <div class="image-container">
+            <img src="https://i.ibb.co/pznBgGK/12334567777.png" alt="Unia Demokratyczna" />
+        </div>
+        
+        <div class="article-text">
+            <p>Są jednak ludzie którzy nie chcą iść tą ciemną drogą, której zgubne konsekwencje ukazała nam przeszłość.</p>
+            
+            <p>Unia Demokratyczna jest jedną z partii której cele są jasne, chcemy zaprowadzenia porządku demokratycznego i utrzymywać go. Musimy zabezpieczyć Polskę przed rządami wszelkich oligarchów. W tym celu postulujemy:</p>
+            
+            <div class="postulate">
+                <h4>Jawność</h4>
+                <p>czyli zapewnienie informacji obywatelom o działalności organów publicznych</p>
+            </div>
+            
+            <div class="postulate">
+                <h4>Demokracja bezpośrednia</h4>
+                <p>referendum, czyli bezpośrednia wola obywateli powinna być najważniejszą instytucją w państwie</p>
+            </div>
+            
+            <div class="postulate">
+                <h4>Decentralizacja władzy</h4>
+                <p>dwa lub więcej stanowisk w państwie nie powinny być jednocześnie sprawowane przez jedną osobę</p>
+            </div>
+            
+            <div class="postulate">
+                <h4>Wolne wybory</h4>
+                <p>politycy nie mogą być prześladowani i "wysyłani" do buforów bo nie popierają jakiegoś układu</p>
+            </div>
+            
+            <p>Jesteśmy otwarci na współpracę z osobami podzielającymi nasze poglądy.</p>
+        </div>
+        
+        <div class="section-divider"></div>
+        
+        <h2 class="section-title">Podsumowanie</h2>
+        
+        <div class="article-text">
+            <p>Choć sprawy Rzeczpospolitej zdają się biec w złym kierunku nie traćmy nadziei, być może jeszcze jest szansa na zjednoczoną i prawdziwie demokratyczną Polskę. Nawet jeśli nasza sprawa upadnie pamiętajmy: władza wszelkich oligarchów i dyktatorów prędzej czy później dobiega końca.</p>
+        </div>
+        
+        <div class="author-signature">
+            <p>Duch Kairu</p>
+        </div>
+    </div>
+</main>

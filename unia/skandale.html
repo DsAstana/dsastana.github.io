@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przegląd Afer Politycznych - Serwis Informacyjny</title>
+    <style>
+        /* Styl dla strony artykułu */
+        body {
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)),
+                url('images/ud_tlo.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .top-bar {
+            background-color: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        main {
+            padding-top: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: rgba(44, 62, 80, 0.95);
+            color: #4fc3f7;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 1.1em;
+        }
+        
+        .back-button:hover {
+            background-color: rgba(79, 195, 247, 0.2);
+            transform: translateX(-5px);
+            border-color: rgba(79, 195, 247, 0.6);
+            color: #fff;
+        }
+        
+        .article-header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        .article-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #4fc3f7;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+        
+        .article-header .subtitle {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            opacity: 0.9;
+        }
+        
+        .article-header .date {
+            font-size: 1em;
+            color: #ccc;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .article-content {
+            background-color: rgba(20, 30, 40, 0.9);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .article-section {
+            margin-bottom: 40px;
+        }
+        
+        .article-section h2 {
+            color: #4fc3f7;
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .article-section h3 {
+            color: #4fc3f7;
+            margin: 25px 0 10px 0;
+            font-size: 1.4em;
+        }
+        
+        .article-text {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        
+        .scandal-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: rgba(40, 50, 60, 0.5);
+            border-radius: 8px;
+            border-left: 4px solid rgba(79, 195, 247, 0.5);
+        }
+        
+        .scandal-item h3 {
+            color: #4fc3f7;
+            margin-bottom: 15px;
+        }
+        
+        .scandal-number {
+            display: inline-block;
+            background-color: rgba(79, 195, 247, 0.2);
+            color: #4fc3f7;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-weight: bold;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #ff9999;
+            padding: 15px;
+            background-color: rgba(50, 0, 0, 0.3);
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 3px solid rgba(255, 0, 0, 0.5);
+        }
+        
+        .important {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .link {
+            color: #4fc3f7;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(79, 195, 247, 0.5);
+        }
+        
+        .link:hover {
+            color: #fff;
+            border-bottom: 1px solid rgba(79, 195, 247, 0.8);
+        }
+        
+        /* Sekcja komentarzy */
+        .comments-section {
+            background-color: rgba(30, 40, 50, 0.9);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+        }
+        
+        .comments-section h2 {
+            color: #4fc3f7;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        
+        .comments-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .comment-item {
+            background-color: rgba(40, 50, 60, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(79, 195, 247, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .comment-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(79, 195, 247, 0.3);
+            background-color: rgba(50, 60, 70, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .comment-item h3 {
+            color: #4fc3f7;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .comment-item p {
+            color: #ccc;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        
+        .comment-meta {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .add-comment {
+            background-color: rgba(40, 50, 60, 0.8);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+        }
+        
+        .add-comment h3 {
+            color: #4fc3f7;
+            margin-bottom: 15px;
+        }
+        
+        .add-comment textarea {
+            width: 100%;
+            background-color: rgba(20, 30, 40, 0.9);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-radius: 5px;
+            color: #fff;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .add-comment button {
+            background-color: rgba(79, 195, 247, 0.2);
+            color: #4fc3f7;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .add-comment button:hover {
+            background-color: rgba(79, 195, 247, 0.4);
+            color: #fff;
+        }
+        
+        /* Podsumowanie */
+        .conclusion {
+            background-color: rgba(30, 40, 50, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        .conclusion h2 {
+            color: #4fc3f7;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .conclusion p {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .author-signature {
+            text-align: right;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(79, 195, 247, 0.2);
+            color: #4fc3f7;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+        
+        /* Responsywność */
+        @media (max-width: 768px) {
+            main {
+                padding: 70px 15px 30px;
+            }
+            
+            .article-header h1 {
+                font-size: 2em;
+            }
+            
+            .article-content {
+                padding: 25px;
+            }
+            
+            .article-section h2 {
+                font-size: 1.6em;
+            }
+            
+            .comments-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-button {
+                position: absolute;
+                top: 20px;
+                left: 10px;
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .article-header h1 {
+                font-size: 1.7em;
+            }
+            
+            .article-header .subtitle {
+                font-size: 1em;
+            }
+            
+            .article-content {
+                padding: 20px;
+            }
+            
+            .article-text {
+                font-size: 1em;
+            }
+            
+            .scandal-item {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Przycisk powrotu -->
+    <a href="hub_unii.html" class="back-button">← Powrót do hubu UD</a>
+    
+    <main>
+        <div class="article-header">
+            <h1>Przegląd skandali Galacticos</h1>
+            <div class="date">Opublikowano: 21 października 2024 | Autor: Docent Jeremy von Geldenbaum</div>
+        </div>
+        
+        <div class="article-content">
+            <div class="article-section">
+                <div class="article-text">
+                    <p><strong>Drodzy Obywatele,</strong></p>
+                    <p>W ostatnich dniach polska scena polityczna była świadkiem wielu afer z udziałem partii Galacticos. Abyście lepiej mogli się w nich odnaleźć, postanowiłem przygotować dla Was krótki przegląd tych wydarzeń. W domyśle jest to początek serii o nieregularnej częstotliwości.</p>
+                </div>
+            </div>
+            
+            <div class="article-section">
+                
+                <div class="scandal-item">
+                    <h3>1. Niedemokratyczne propozycje zmian w konstytucji</h3>
+                    <div class="article-text">
+                        <p>Na temat tego skandalu napisałem osobny artykuł (<a href="m.rivalregions.com/#news/show/3836840" class="link" target="_blank">m.rivalregions.com/#news/show/3836840</a>), więc nie będę się tu specjalnie o nim rozpisywał. W skrócie sekretarz partii Galacticos, Dan Palownik I, zaproponował, by wpływ na życie polityczne kraju był w praktyce uzależniony od siły militarnej danej partii, co skutecznie wykluczyłoby z życia politycznego ogromną część graczy.</p>
+                        <p>Chciał wpisać te skandaliczne propozycje do konstytucji, jednak napotkał zaciekły opór społeczny, w wyniku czego temat ucichł. <span class="important">Na razie.</span></p>
+                    </div>
+                </div>
+                
+                <div class="scandal-item">
+                    <h3>2. "Ciekawe" poglądy wysoko postawionego członka partii</h3>
+                    <div class="article-text">
+                        <p>Wysoko postawiony członek partii Galacticos, niejaki Snoopi84, popisał się swoimi dość nietypowymi poglądami. Pod ustawą o poszerzeniu parlamentu nazwał lud polski:</p>
+                        <div class="quote">"robactwem"</div>
+                        <p>A posłów (m. in. Unii Demokratycznej i Sarmacji), którzy stają w jego obronie:</p>
+                        <div class="quote">"piewcami robactwa"</div>
+                        <p>Pokazał w ten sposób swoją twarz darwinisty społecznego, który najwyraźniej wszystkich, którzy nie są zrzeszeni w Galacticos uważa za gorszy sort.</p>
+                        <p><span class="important">Pozostaje zadać sobie pytanie, czy jest to oficjalne stanowisko partii Galacticos, czy też jedynie prywatny wybryk gracza Snoopi84.</span></p>
+                    </div>
+                </div>
+                
+                <div class="scandal-item">
+                    <h3>3. Próba uciszenia opozycji</h3>
+                    <div class="article-text">
+                        <p>Jeden z większych skandali politycznych ostatnich lat miał miejsce raptem dzisiaj rano. Gracz partii Galacticos imieniem Józek złożył ustawę o przekazaniu Pomorza do buforu.</p>
+                        <p>Ustawa ta miała w rzeczywistości na celu pozbycie się z kraju Unii Demokratycznej, której działacze w ostatnich dniach prowadzili intensywną kampanię na rzecz prodemokratycznych i proludowych zmian. Jak widać nadepnęli tym na odcisk oligarchii, gdyż ta postanowiła ich uciszyć.</p>
+                        <p>Projekt został ochoczo poparty przez członków Galacticos, którzy działalność niepokornych parlamentarzystów uznali za "obstrukcję". Ustawa naruszała art. 8 §1 Konstytucji, jednak Galacticos nic sobie z tego nie robiło. Ustawę wycofano dopiero po osobistej interwencji I Prezesa Wieniawy.</p>
+                        <p><span class="important">Wydarzenie to powinno wszystkich nas skłonić do refleksji - czy bufor, który jest kluczowym elementem bezpieczeństwa państwa jest w dobrych rękach?</span></p>
+                        <p>Odpowiedź nasuwa się sama, bufor zdecydowanie nie powinien być rządzony przez członków partii aktywnie zaangażowanej w politykę krajową, tym bardziej, że dzisiejsze wydarzenia pokazały, iż partia ta jest gotowa traktować ów bufor jako instrument do wpływania na działania innych partii.</p>
+                        <p><span class="important">Dlatego wzywam Prezydenta Aladeena i NRK do rozważenia zmiany przywódcy buforu (zgodnie z art. 6 §3 Konstytucji) na osobę bardziej neutralną (np. regent Bobo).</span> Każdy Polak spałby spokojniej, gdyby miał świadomość, że bufor nie zostanie wykorzystany do tłumienia opozycji antyoligarchicznej.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="conclusion">
+                <h2>Podsumowanie</h2>
+                <p>To wszystkie skandale, które chciałbym Wam dzisiaj przedstawić, Obywatele. Zważmy jednak, iż są to wydarzenia raptem z ostatniego tygodnia. Chciałbym wierzyć, że afery te są jedynie drobnymi potknięciami, że Galacticos w gruncie rzeczy przyświecają dobre intencje.</p>
+                <p>Mam nadzieję, że kolejne odsłony tej serii nie będą musiały już powstać, jednak bilans ostatnich dni w tej kwestii nie napawa optymizmem.</p>
+            </div>
+            
+            <div class="author-signature">
+                <p>— Docent Jeremy von Geldenbaum</p>
+            </div>
+        </div>
+        
+        <!-- Sekcja komentarzy -->
+        <div class="comments-section">
+            <h2>Komentarze Obywateli</h2>
+            <div class="comments-list">
+                <div class="comment-item">
+                    <h3>Zaniepokojony Obywatel</h3>
+                    <p>"To co się dzieje na naszej scenie politycznej jest przerażające. Demokracja w Polsce jest zagrożona!"</p>
+                    <div class="comment-meta">Dodano: Dzisiaj, 14:30 | 42 polubienia</div>
+                </div>
+                
+                <div class="comment-item">
+                    <h3>Stary Wyga</h3>
+                    <p>"Nic nowego pod słońcem. Oligarchia zawsze próbuje umocnić swoją władzę. Musimy być czujni!"</p>
+                    <div class="comment-meta">Dodano: Dzisiaj, 15:45 | 28 polubień</div>
+                </div>
+                
+                <div class="comment-item">
+                    <h3>Młody Idealista</h3>
+                    <p>"Dzięki za ten artykuł! W końcu ktoś mówi głośno o tym, co się naprawdę dzieje. Czekam na kolejne odsłony!"</p>
+                    <div class="comment-meta">Dodano: Dzisiaj, 16:20 | 35 polubień</div>
+                </div>
+            </div>
+            
+            <div class="add-comment">
+                <h3>Dodaj swój komentarz</h3>
+                <textarea placeholder="Podziel się swoją opinią na temat przedstawionych afer..."></textarea>
+                <button type="button">Opublikuj komentarz</button>
+            </div>
+        </div>
+        
+        <!-- Informacja o serii -->
+        <div style="text-align: center; margin-top: 40px; padding: 15px; background-color: rgba(0, 0, 0, 0.5); border-radius: 5px; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: #4fc3f7; font-weight: bold; font-size: 0.9em;">
+                SZERZENIE PRAWDY JEST OBOWIĄZKIEM KAŻDEGO OBYWATELA<br>
+            </p>
+        </div>
+    </main>
+    
+</body>
+</html>
