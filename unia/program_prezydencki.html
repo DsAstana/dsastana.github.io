@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kandydat Koalicji - Serwis Informacyjny</title>
+    <style>
+        /* Styl dla strony artykułu */
+        body {
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)),
+                url('images/ud_tlo.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .top-bar {
+            background-color: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        main {
+            padding-top: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: rgba(44, 62, 80, 0.95);
+            color: #4fc3f7;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 1.1em;
+        }
+        
+        .back-button:hover {
+            background-color: rgba(79, 195, 247, 0.2);
+            transform: translateX(-5px);
+            border-color: rgba(79, 195, 247, 0.6);
+            color: #fff;
+        }
+        
+        .article-header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+        }
+        
+        .article-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #4fc3f7;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+        
+        .article-header .subtitle {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            opacity: 0.9;
+        }
+        
+        .article-header .date {
+            font-size: 1em;
+            color: #ccc;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .article-content {
+            background-color: rgba(20, 30, 40, 0.9);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .article-section {
+            margin-bottom: 40px;
+        }
+        
+        .article-section h2 {
+            color: #4fc3f7;
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .article-section h3 {
+            color: #4fc3f7;
+            margin: 25px 0 10px 0;
+            font-size: 1.4em;
+        }
+        
+        .article-text {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        
+        /* Styl dla obrazów w treści */
+        .content-image {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .content-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .content-image-left {
+            float: left;
+            margin: 0 45px 40px 0;
+            max-width: 55%;
+
+        }
+        
+        .content-image-right {
+            float: right;
+            margin: 0 0 20px 25px;
+            max-width: 45%;
+            border-radius: 8px;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Kontener dla dwóch obrazów obok siebie */
+        .image-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .image-row .image-item {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .image-row .image-item img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Clearfix dla tekstu z obrazami */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        
+        .program-point {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: rgba(30, 40, 50, 0.5);
+            border-radius: 8px;
+            border-left: 4px solid #4fc3f7;
+        }
+        
+        .program-point h3 {
+            color: #4fc3f7;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #ff9999;
+            padding: 15px;
+            background-color: rgba(50, 0, 0, 0.3);
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 3px solid rgba(255, 0, 0, 0.5);
+        }
+        
+        .important {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .coalition-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .coalition-tag {
+            background-color: rgba(79, 195, 247, 0.2);
+            border: 1px solid rgba(79, 195, 247, 0.5);
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-weight: bold;
+            color: #4fc3f7;
+        }
+        
+        .author-signature {
+            text-align: right;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(79, 195, 247, 0.2);
+            color: #4fc3f7;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+        
+        /* Sekcja komentarzy */
+        .comments-section {
+            background-color: rgba(30, 40, 50, 0.9);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+        }
+        
+        .comments-section h2 {
+            color: #4fc3f7;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        
+        .comments-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .comment-item {
+            background-color: rgba(40, 50, 60, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(79, 195, 247, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .comment-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(79, 195, 247, 0.3);
+            background-color: rgba(50, 60, 70, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .comment-item h3 {
+            color: #4fc3f7;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .comment-item p {
+            color: #ccc;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        
+        .comment-meta {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .add-comment {
+            background-color: rgba(40, 50, 60, 0.8);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+        }
+        
+        .add-comment h3 {
+            color: #4fc3f7;
+            margin-bottom: 15px;
+        }
+        
+        .add-comment textarea {
+            width: 100%;
+            background-color: rgba(20, 30, 40, 0.9);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-radius: 5px;
+            color: #fff;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .add-comment button {
+            background-color: rgba(79, 195, 247, 0.2);
+            color: #4fc3f7;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .add-comment button:hover {
+            background-color: rgba(79, 195, 247, 0.4);
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                padding: 70px 15px 30px;
+            }
+            
+            .article-header h1 {
+                font-size: 2em;
+            }
+            
+            .article-content {
+                padding: 25px;
+            }
+            
+            .content-image-left, .content-image-right {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                max-width: 90%;
+            }
+            
+            .back-button {
+                position: absolute;
+                top: 20px;
+                left: 10px;
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .article-header h1 {
+                font-size: 1.7em;
+            }
+            
+            .article-content {
+                padding: 20px;
+            }
+            
+            .article-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Przycisk powrotu -->
+    <a href="hub_unii.html" class="back-button">← Powrót do hubu UD</a>
+    
+    <main>
+        <div class="article-header">
+            <h1>Kandydat Koalicji</h1>
+            <div class="subtitle">Docent Jeremy von Geldenbaum – kandydat na Prezydenta Rzeczpospolitej Polskiej</div>
+            <div class="date">Opublikowano: 21 października 2024 | Koalicja Polskich Patriotów</div>
+        </div>
+        
+        <div class="article-content">
+            <!-- Wstęp z dwoma obrazami: 34.png i 5.png obok siebie -->
+
+                <div class="image-item">
+                    <img src="images/34.png" alt="Obywatele">
+                </div>
+                <div class="image-item">
+                    <img src="images/5.png" alt="Walka o demokrację">
+                </div>
+
+            
+            <div class="article-section clearfix">
+                <div class="article-text">
+                    <p><strong>Drodzy Obywatele!</strong></p>
+                    <p>Widzimy, że młoda demokracja w Polsce jest jeszcze niestabilna. Kliki znowu wypęłzły na powierzchnię, próbując objąć swoimi mackami całe życie polityczne w kraju. Dlatego też ponownie startujemy w szerokiej koalicji Sarmatia-UD-GK-NSPPR-PRW do której wczoraj dołączyła partia LEK.</p>
+                    <p>Odkładając na moment dzielące nas kwestie, ponownie jednoczymy się w celu obrony polskiej demokracji.</p>
+                </div>
+            </div>
+            
+            <!-- Logo koalicji (logotyp koalicji) -->
+
+               <center> <img src="images/loga.png" alt="Logo Koalicji Polskich Patriotów"> </center>
+
+            
+            <!-- Problemy z systemem prawnym -->
+            <div class="article-section">
+                <div class="article-text">
+                    <p>Pierwsza kadencja demokratycznego rządu ujawniła pewne problemy z polskim systemem prawnym, który należy jak najszybciej uzdrowić, by kraj nasz mógł funkcjonować sprawnie i demokratycznie.</p>
+                </div>
+            </div>
+            
+            <!-- Zdjęcie kandydata (Doc.png) -->
+            <div class="content-image">
+                <img src="images/Doc.png" alt="Docent Jeremy von Geldenbaum">
+            </div>
+            
+            <!-- Ogłoszenie kandydatury -->
+            <div class="article-section">
+                <div class="article-text">
+                    <p>W nadchodzących wyborach prezydenckich, które odbędą się już dzisiaj o 15:00, Koalicja Polskich Patriotów w wyniku głosowania liderów wystawia <strong>Docenta Jeremiego von Geldenbauma</strong>. Wieloletniego opozycjonistę demokratycznego, lidera wielu ekspedycji kolonizacyjnych na Ziemi i Księżycu oraz dawnego przywódcę państw w Syrii i Astanie.</p>
+                </div>
+            </div>
+            
+            <!-- Program: Wzmocnienie Władzy Ustawodawczej -->
+
+                <h3>Wzmocnienie Władzy Ustawodawczej</h3>
+                <div class="article-text">
+                    <p>Konieczne jest wzmocnienie władzy ustawodawczej poprzez utworzenie procedur uchwalania ustaw (prawa) przez sejm. W obecnym systemie jedynie dekrety prezydenta i konstytucja miały faktyczne skutki prawne, demokratycznie wybrani posłowie nie mogą w pełni wypełniać swojej konstytucyjnej misji ustawodawczej.</p>
+                    <p>W wersji poza RR sejm może być grupą wyłonioną z różnych partii zgodnie z ich wynikiem % w wyborach.</p>
+                    <p>Potrzebujemy struktury, w której prawa są jawnie uchwalane, a nie ukryte za kurtyną partyjnych interesów. <span class="important">Dlatego jako prezydent będę wspierać projekty zmierzające do tworzenia ram prawnych, które dadzą władzy ustawodawczej realne możliwości działania w służbie społeczeństwu.</span></p>
+                </div>
+
+            
+            <!-- Program: Uporządkowanie Prawa Meldunkowego z obrazem lewy numer 9.png -->
+
+                <h3>Uporządkowanie Prawa Meldunkowego</h3>
+                <div class="article-text">
+                    <p>Drugi kluczowy filar mojego programu to gruntowna reforma przepisów meldunkowych. W obecnej sytuacji regulacje są niejasne i sprzyjają patologiom. Przykładowo zgodnie z obecnym prawem MSZ może zupełnie legalnie wpuścić do kraju osoby które walczą przeciwko Rzeczpospolitej, publicznie deklarują wrogość wobec niej.</p>
+                    <p>Jak pokazały ataki na Prezesa PRW świeżo po objęciu przez niego urzędu (z powodu wydanych zameldowań) - MSZ musi być zabezpieczony przed naciskami politycznymi poprzez:</p>
+                    <ul>
+                        <li>Kolegialność (przykładowo rada w składzie: MSZ + jeden z poprzednich MSZ + osoba wskazana przez I Prezesa NRK)</li>
+                        <li>Zaostrzenie prawa, wprowadzenie obowiązku odrzucenia zameldowania w pewnych sytuacjach</li>
+                    </ul>
+                    <p>Porządek w kwestii meldunkowej zapewni Rzeczpospolitej większe bezpieczeństwo, a lojalnym obywatelom zagwarantuje zameldowanie bez względu na układ polityczny. <span class="important">W mojej wizji Polska staje się krajem, w którym każdy obywatel ma przejrzyste i równe prawa, a prawo meldunkowe służy dobru wspólnemu.</span></p>
+                </div>
+
+            
+
+
+                                <img src="images/9.png" alt="Prawo meldunkowe">
+        </div>
+        
+        <!-- Sekcja komentarzy -->
+        <div class="comments-section">
+            <h2>Głos Obywateli</h2>
+            <div class="comments-list">
+                <div class="comment-item">
+                    <h3>Obywatel z Wielkopolski</h3>
+                    <p>"Wreszcie ktoś, kto ma konkretny plan na uzdrowienie systemu prawnego! Popieram w 100%."</p>
+                    <div class="comment-meta">Dodano: Dzisiaj, 12:45 | 67 polubień</div>
+                </div>
+                
+                <div class="comment-item">
+                    <h3>Doświadczony Górnik</h3>
+                    <p>"Prawo meldunkowe to plaga. Każdy powinien mieć równe szanse, niezależnie od układów. Docent to nasz człowiek!"</p>
+                    <div class="comment-meta">Dodano: Dzisiaj, 13:12 | 52 polubienia</div>
+                </div>
+                
+                <div class="comment-item">
+                    <h3>Młody Aktywista</h3>
+                    <p>"Szeroka koalicja to jedyna droga, by obronić demokrację. Razem możemy więcej!"</p>
+                    <div class="comment-meta">Dodano: Dzisiaj, 13:55 | 43 polubienia</div>
+                </div>
+            </div>
+            
+            <div class="add-comment">
+                <h3>Dodaj swój komentarz</h3>
+                <textarea placeholder="Podziel się swoją opinią o kandydacie i programie Koalicji..."></textarea>
+                <button type="button">Opublikuj komentarz</button>
+            </div>
+        </div>
+        
+        <!-- Informacja o wyborach -->
+        <div style="text-align: center; margin-top: 40px; padding: 15px; background-color: rgba(0, 0, 0, 0.5); border-radius: 5px; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <p style="color: #4fc3f7; font-weight: bold; font-size: 0.9em;">
+                WYBORY PREZYDENCKIE – DZIŚ O 15:00<br>
+                GŁOSUJ NA SWOJEGO KANDYDATA
+            </p>
+        </div>
+    </main>
+    
+</body>
+</html>
